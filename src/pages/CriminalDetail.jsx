@@ -7,6 +7,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import ReactCountryFlag from "react-country-flag"
 
 const CriminalDetail = ({ setActive }) => {
 
@@ -91,6 +92,20 @@ const CriminalDetail = ({ setActive }) => {
               <div className="DETAIL-DetailIcon">cc</div>
               <div className="DETAIL-entityName">ADDRESS</div>
               <div className="DETAIL-entityValue">{criminal?.streetAddress}</div>
+            </div>
+            <div className="DETAIL-entityInfoGroup">
+              <div className="DETAIL-DetailIcon">
+                {<ReactCountryFlag
+                  countryCode={criminal?.nationality}
+                  svg
+                  style={{
+                    width: '2em',
+                    height: '2em',
+                  }}
+                  title="US"
+                />}</div>
+              <div className="DETAIL-entityName">Country</div>
+              <div className="DETAIL-entityValue">{criminal?.country}</div>
             </div>
 
           </div>

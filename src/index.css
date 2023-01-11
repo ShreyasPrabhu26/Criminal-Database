@@ -415,6 +415,7 @@ li {
 .DETAIL-entityInfoGroup {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   gap: 20px;
   /* border: 1px solid red; */
   border-radius: 20px;
