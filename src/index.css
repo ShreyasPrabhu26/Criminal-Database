@@ -75,6 +75,39 @@ li {
   gap: 2rem;
 }
 
+.mostWanted {
+  border: 1px solid red;
+  padding-bottom: 20px;
+  background-color: #32373f;
+  border-radius: 20px;
+}
+
+.form-category {
+  margin-top: 10px;
+}
+.AskMostWantedgroupRadio {
+  display: flex;
+  gap: 200px;
+  align-items: center;
+  margin-left: 140px;
+}
+
+.AskMostWantedsub {
+  display: flex;
+  gap: 9px;
+  height: 15px;
+  width: 20px;
+}
+
+.mostWantedTitile {
+  font-size: 20px;
+}
+.radioButton {
+  border: 2px solid rgb(0, 255, 60);
+}
+
+/* TODO:last css change */
+.form-tags,
 .form-input {
   border: 1px solid black;
   width: 40rem;
@@ -265,7 +298,7 @@ li {
   gap: 17px;
   border-radius: 35px;
   margin: 0 auto;
-  padding: 20px 0 20px 0;
+  padding: 40px 0 40px 0;
 }
 
 .criminalImage img {
@@ -316,18 +349,39 @@ li {
 
 .btn-delete {
   width: 200px;
-  background-color: #d92e2e;
+  background-color: #cf8686;
   outline: none;
-  height: 30px;
-  border: 1px solid black;
+  height: 40px;
+  border: 2px solid black;
   border-radius: 20px;
   text-decoration: none;
   /* padding-bottom: 20px; */
 }
 
-.btn-delete:hover {
+.btnF {
+  font-size: 20px;
   transform: scale(1.03);
   transition: 0.3s ease;
+}
+
+.btnF:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease;
+}
+
+.btn-edit {
+  width: 200px;
+  background-color: #d92e2e;
+  outline: none;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+.CardfooterElements {
+  display: flex;
+  gap: 20px;
 }
 
 /* CRIMINAL DETAIL PAGE */
@@ -507,4 +561,37 @@ li {
   100% {
     transform: rotatez(2turn);
   }
+}
+
+/* TAGS */
+
+.tags {
+  display: flex;
+  gap: 20px;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #b3e0fb;
+}
+
+.mostWantedCriminalTitle {
+  text-align: center;
+}
+
+/* NOT FOUND */
+.notfoundImageContainer {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notFoundImage {
+  height: 90vh;
 }

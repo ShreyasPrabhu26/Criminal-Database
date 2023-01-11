@@ -18,7 +18,7 @@ const initialState = {
   ConfirmPassword: ""
 }
 
-const Auth = ({ setActive }) => {
+const Auth = ({ setActive, setUser }) => {
   const [state, setState] = useState(initialState);
   // Sign-In ===> signUp = false
   const [signUp, setsignUp] = useState(false);
@@ -48,6 +48,7 @@ const Auth = ({ setActive }) => {
       //SIGN-IN
       if (email && password) {
         const { user } = await signInWithEmailAndPassword(auth, email, password);
+        setUser(user)
         setActive("home")
       }
       else {

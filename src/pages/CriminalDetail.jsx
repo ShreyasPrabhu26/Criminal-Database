@@ -14,6 +14,23 @@ const CriminalDetail = ({ setActive }) => {
   const { id } = useParams();
   const [criminal, setCriminal] = useState(null);
 
+  // const [criminals, setCriminals] = useState(null);
+  // const [tags, setTags] = useState(null);
+
+  // useEffect(() => {
+  //   const getCriminalData = async () => {
+  //     const blogRef = collection(db, "criminals");
+  //     const blogs = await getDocs(blogRef);
+  //     setCriminals(blogs.doc.map((doc) => ({ id: doc.id, ...doc.data() })));
+  //     let tags = [];
+  //     blogs.docs.map((doc) => tags.push(...doc.get("tags")));
+  //     let uniqueTags = [...new Set(tags)]
+  //     setTags(uniqueTags)
+  //   }
+
+  //   getCriminalData()
+  // }, [])
+
   useEffect(() => {
     id && getCriminalDetails();
   }, [id])
@@ -27,7 +44,7 @@ const CriminalDetail = ({ setActive }) => {
 
   return (
     <div>
-      {console.log("Criminal", criminal)}
+      {/* {console.log("Criminal", criminal)} */}
       <div className="DETAIL-criminalDetailContainer">
         <div className="DETAIL-criminalDetailHeader">
           <div className="DETAIL-criminalNameCard">
@@ -102,10 +119,10 @@ const CriminalDetail = ({ setActive }) => {
                     width: '2em',
                     height: '2em',
                   }}
-                  title="US"
+                  title={criminal?.nationality}
                 />}</div>
               <div className="DETAIL-entityName">Country</div>
-              <div className="DETAIL-entityValue">{criminal?.country}</div>
+              <div className="DETAIL-entityValue">{criminal?.nationality}</div>
             </div>
 
           </div>

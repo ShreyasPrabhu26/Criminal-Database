@@ -9,7 +9,7 @@ const CriminalCards = ({ criminals, user, handleDelete }) => {
     return (
         <div className="criminalCardMainContainer">
             {criminals?.map((item) => (
-                <div className="criminalCardContainer">
+                <div className="criminalCardContainer" key={item.id}>
                     <div className="criminalCardConatiner Flex-center">
                         <div className="criminalImage Flex-center">
                             <img src={item.imgUrl} alt="" />
@@ -28,21 +28,35 @@ const CriminalCards = ({ criminals, user, handleDelete }) => {
                         </div>
                         <Link to={`/CriminalDetail/${item.id}`}>
                             <button
-                                className="btn-criminalReadMore Flex-center">
+                                className="btnF btn-criminalReadMore Flex-center">
                                 Read More
                             </button>
                         </Link>
 
-                        {(user?.uid === item.userId) && (
-                            <div className="btn-delete-container">
-                                <button
-                                    className="btn-delete"
-                                    onClick={() => handleDelete(item.id)}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        )}
+                        <div className="CardfooterElements">
+                            {(user?.uid === item.userId) && (
+                                <Link to={`/update/${item.id}`}>
+                                    <div className="btn-delete-container">
+                                        <button
+                                            className="btnF btn-edit"
+                                        >
+                                            Edit
+                                        </button>
+                                    </div>
+                                </Link>
+
+                            )}
+                            {(user?.uid === item.userId) && (
+                                <div className="btn-delete-container">
+                                    <button
+                                        className="btnF btn-delete"
+                                        onClick={() => handleDelete(item.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             ))

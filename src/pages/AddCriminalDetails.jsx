@@ -13,10 +13,11 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 // NOTE THAT ONLY SPECIAL POLICE OFFICERS CAN ACCESS THIS PAGE!!!
-const AddCriminalDetails = ({ user }) => {
+const AddCriminalDetails = ({ user, setActive }) => {
 
     const initialData = {
         fullName: "",
@@ -25,6 +26,7 @@ const AddCriminalDetails = ({ user }) => {
         nationality: "",
         height: "",
         dob: "",
+        mostWanted: "",
         // addrress
         streetAddress: "",
         city: "",
@@ -35,7 +37,11 @@ const AddCriminalDetails = ({ user }) => {
     }
     const handleChange = (e) => {
         setForm({ ...formData, [e.target.name]: e.target.value });
-        console.log(formData);
+        // console.log(formData);
+    };
+
+    const handleMostWanted = (e) => {
+        setForm({ ...formData, mostWanted: e.target.value });
     };
 
     const handleTag = (tags) => {
@@ -65,7 +71,10 @@ const AddCriminalDetails = ({ user }) => {
     const [formData, setForm] = useState(initialData);
     const [file, setFile] = useState(null);
     const [progress, setProgress] = useState(null);
-    const { fullName, tags, crimeCategory, height, dob, streetAddress, city, state, postalCode, phone } = formData;
+    const { fullName, tags, mostWanted, crimeCategory, height, dob, streetAddress, city, state, postalCode, phone } = formData;
+
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const uploadFile = () => {
@@ -80,10 +89,10 @@ const AddCriminalDetails = ({ user }) => {
                     setProgress(progress);
                     switch (snapshot.state) {
                         case "paused":
-                            console.log("Upload is paused");
+                            // console.log("Upload is paused");
                             break;
                         case "running":
-                            console.log("Upload is running");
+                            // console.log("Upload is running");
                             break;
                         default:
                             break;
@@ -94,7 +103,7 @@ const AddCriminalDetails = ({ user }) => {
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
-                        toast.info("Image upload to Database Successfully");
+                        toast.info("Image uploaded to Database Successfully");
                         setForm((prev) => ({ ...prev, imgUrl: downloadUrl }));
                     });
                 }
@@ -104,31 +113,60 @@ const AddCriminalDetails = ({ user }) => {
         file && uploadFile();
     }, [file]);
 
+    useEffect(() => {
+        id && getCriminalDetails();
+    }, [id])
+
+    const getCriminalDetails = async () => {
+        const docRef = doc(db, "criminals", id);
+        const snapshot = await getDoc(docRef);
+        if (snapshot.exists()) {
+            setForm({ ...snapshot.data() })
+        }
+        setActive(null);
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if (category && tags & title & file && description && trending) {
-        try {
-            await addDoc(collection(db, "criminals"), {
-                ...formData,
-                timestamp: serverTimestamp(),
-                author: user.displayName,
-                userId: user.uid,
-            });
-            toast.success("Criminal Detail Uploaded successfully");
-        } catch (err) {
-            toast.error("ERROR");
-            console.log(err);
+        if (fullName & crimeCategory && height && dob && streetAddress, phone) {
+            if (!id) {
+                try {
+                    await addDoc(collection(db, "criminals"), {
+                        ...formData,
+                        timestamp: serverTimestamp(),
+                        author: user.displayName,
+                        userId: user.uid,
+                    });
+                    toast.success("Criminal Detail Uploaded successfully");
+                } catch (err) {
+                    toast.error("ERROR");
+                    console.log(err);
+                }
+            } else {
+                try {
+                    await updateDoc(doc(db, "criminals", id), {
+                        ...formData,
+                        timestamp: serverTimestamp(),
+                        author: user.displayName,
+                        userId: user.uid,
+                    });
+                    toast.success("Criminal Update is successfull");
+                } catch (err) {
+                    toast.error("ERROR");
+                    console.log(err);
+                }
+            }
         }
-        // }
-        // else {
-        //   toast.error("FAILEDDDD");
-        // }
+        else {
+            toast.error("ERROR");
+        }
+        navigate("/")
     }
 
     return (
         <div className="criminalDataEntryContainer">
-            <h1 className='headerText'>Criminal Data Entry</h1>
+            <h1 className='headerText'>{id ? "Update Criminal Data" : "Criminal Data Entry"}</h1>
             <div className="criminal-entry-container">
                 <form className="form-criminalEntry" onSubmit={handleSubmit}>
                     {/* {FULL-NAME} */}
@@ -151,6 +189,39 @@ const AddCriminalDetails = ({ user }) => {
                             onChange={(e) => setFile(e.target.files[0])}
                         />
                     </div>
+                    {/* {MOST WANTED?} */}
+            
+                    <div className="mostWanted">
+                        <p className="mostWantedTitile">Most Wanted Criminal?</p>
+                        <div className="AskMostWantedgroupRadio">
+                            <div className="AskMostWantedsub">
+                                <input
+                                    type="radio"
+                                    className="radioButton"
+                                    value="yes"
+                                    name="radioOption"
+                                    checked={mostWanted === "yes"}
+                                    onChange={handleMostWanted}
+                                />
+                                <label htmlFor="radioOption" className="form-check-label">
+                                    Yes&nbsp;
+                                </label>
+                            </div>
+                            <div className="AskMostWantedsub">
+                                <input
+                                    type="radio"
+                                    className="radioButton"
+                                    value="no"
+                                    name="radioOption"
+                                    checked={mostWanted === "no"}
+                                    onChange={handleMostWanted}
+                                />
+                                <label htmlFor="radioOption" className="form-check-label">
+                                    No&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     {/* {TAGS} */}
                     <div className="form-input form-tags">
                         <ReactTagInput
@@ -160,7 +231,7 @@ const AddCriminalDetails = ({ user }) => {
                         </ReactTagInput>
                     </div>
                     {/* {Crime Category} */}
-                    <div className="">
+                    <div className="form-category">
                         <select
                             value={formData.crimeCategory}
                             onChange={onCategoryChange}
@@ -496,7 +567,7 @@ const AddCriminalDetails = ({ user }) => {
                     {/* SUBMIT BTN */}
                     <div className="col-12 py-3 text-center">
                         <button className="btn btn-add" type='submit' disabled={progress !== null && progress < 100}>
-                            Submit
+                            {id ? "Update" : "Submit"}
                         </button>
                     </div>
                 </form>

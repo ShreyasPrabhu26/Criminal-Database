@@ -1,9 +1,10 @@
 import React from 'react'
+import MostWanted from '../components/MostWanted'
 
-const CrimeCategory = () => {
+const CrimeCategory = ({ user }) => {
     return (
         <div>
-            <h1>HERE WE WILL DISPLAY THE DIFFERENT TYPES OF CRIMES HAPPENDING IN THE CITY</h1>
+            <h1><MostWanted user={user} /></h1>
         </div>
     )
 }

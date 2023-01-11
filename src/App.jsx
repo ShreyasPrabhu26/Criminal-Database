@@ -53,17 +53,18 @@ function App() {
       />
       <ToastContainer />
       <Routes>
-        <Route path='/' element={<Home setActive={setActive} user={user}/>} />
+        <Route path='/' element={<Home setActive={setActive} user={user} />} />
         <Route path='/department' element={<Department />} />
         <Route path='/police' element={<Police />} />
-        <Route path='/Criminals' element={<Criminals setActive={setActive} user={user}/>} />
+        <Route path='/Criminals' element={<Criminals setActive={setActive} user={user} />} />
         {/* <Route path='/create' element={<Editing />} /> */}
-        <Route path='/AddCriminalDetails' element={user?.uid ? <AddCriminalDetails user={user} /> : <Navigate to="/" />} />
-        <Route path='/Category' element={<CrimeCategory />} />
-        <Route path='/auth' element={<Auth setActive={setActive} />} />
+        <Route path='/AddCriminalDetails' element={user?.uid ? <AddCriminalDetails user={user} setActive={setActive} /> : <Navigate to="/" />} />
+        <Route path='/Category' element={<CrimeCategory user={user} />} />
+        <Route path='/auth' element={<Auth setActive={setActive} setUser={setUser} />} />
 
         <Route path='/CriminalDetail/:id' element={<CriminalDetail setActive={setActive} />} />
-        <Route path='/update:id' element={user?.uid ? <Editing user={user} /> : <Navigate to="/" />} />
+        {/* <Route path='/update:id' element={user?.uid ? <Editing user={user} /> : <Navigate to="/" />} /> */}
+        <Route path='/update/:id' element={user?.uid ? <AddCriminalDetails user={user} setActive={setActive} /> : <Navigate to="/" />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
