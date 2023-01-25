@@ -11,20 +11,57 @@ import {
     serverTimestamp,
     doc,
     updateDoc,
+    onSnapshot
 } from "firebase/firestore";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate, useParams } from 'react-router-dom';
+
+// EXPERIMEMTAL
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import firebase from 'firebase/compat/app';
 
 
 // NOTE THAT ONLY SPECIAL POLICE OFFICERS CAN ACCESS THIS PAGE!!!
-const AddCriminalDetails = ({ user }) => {
+const AddCriminalDetails = ({ user, setActive }) => {
+
+    const [polices, setPolices] = useState([]);
+    const [policesID, setPolicesID] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const unsub = onSnapshot(
+            collection(db, "polices"),
+            (snapshot) => {
+                let list = [];
+                let policesID = [];
+                snapshot.docs.forEach((doc) => {
+                    list.push(doc.data().fullName);
+                    policesID.push(doc.id);
+
+                })
+                setPolices(list);
+                setPolicesID(policesID);
+                setLoading(false);
+                setActive("home")
+            }, (error) => {
+                console.log(`Error:`, error);
+            }
+        )
+        return () => {
+            unsub();
+        }
+    }, [setActive]);
 
     const initialData = {
         fullName: "",
         tags: [],
         crimeCategory: "",
+        // policeDesignation: "",
         nationality: "",
         height: "",
         dob: "",
+        mostWanted: "",
         // addrress
         streetAddress: "",
         city: "",
@@ -33,9 +70,15 @@ const AddCriminalDetails = ({ user }) => {
         //end
         phone: "",
     }
+
+
     const handleChange = (e) => {
         setForm({ ...formData, [e.target.name]: e.target.value });
         // console.log(formData);
+    };
+
+    const handleMostWanted = (e) => {
+        setForm({ ...formData, mostWanted: e.target.value });
     };
 
     const handleTag = (tags) => {
@@ -45,6 +88,11 @@ const AddCriminalDetails = ({ user }) => {
 
     const onCategoryChange = (e) => {
         setForm({ ...formData, crimeCategory: e.target.value });
+    };
+
+    const onPoliceDesignationChange = (e) => {
+        setForm({ ...formData, policeDesignation: secondCollection.doc(e.target.value) });
+        // Reference to the document in the second collection
     };
 
     const onCategoryNationality = (e) => {
@@ -61,11 +109,13 @@ const AddCriminalDetails = ({ user }) => {
         "Terrorism",
     ]
 
-
     const [formData, setForm] = useState(initialData);
     const [file, setFile] = useState(null);
     const [progress, setProgress] = useState(null);
-    const { fullName, tags, crimeCategory, height, dob, streetAddress, city, state, postalCode, phone } = formData;
+    const { fullName, tags, mostWanted, crimeCategory, policeDesignation, height, dob, streetAddress, city, state, postalCode, phone } = formData;
+
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const uploadFile = () => {
@@ -76,7 +126,7 @@ const AddCriminalDetails = ({ user }) => {
                 (snapshot) => {
                     const progress =
                         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    // console.log("Upload is " + progress + "% done");
+                    console.log("Upload is " + progress + "% done");
                     setProgress(progress);
                     switch (snapshot.state) {
                         case "paused":
@@ -94,7 +144,7 @@ const AddCriminalDetails = ({ user }) => {
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
-                        toast.info("Image upload to Database Successfully");
+                        toast.info("Image uploaded to Database Successfully");
                         setForm((prev) => ({ ...prev, imgUrl: downloadUrl }));
                     });
                 }
@@ -104,35 +154,114 @@ const AddCriminalDetails = ({ user }) => {
         file && uploadFile();
     }, [file]);
 
+    useEffect(() => {
+        id && getCriminalDetails();
+    }, [id])
+
+    const getCriminalDetails = async () => {
+        const docRef = doc(db, "criminals", id);
+        const snapshot = await getDoc(docRef);
+        if (snapshot.exists()) {
+            setForm({ ...snapshot.data() })
+        }
+        setActive(null);
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if (category && tags & title & file && description && trending) {
-        try {
-            await addDoc(collection(db, "criminals"), {
-                ...formData,
-                timestamp: serverTimestamp(),
-                author: user.displayName,
-                userId: user.uid,
-            });
-            toast.success("Criminal Detail Uploaded successfully");
-        } catch (err) {
-            toast.error("ERROR");
-            console.log(err);
+        if (fullName & crimeCategory && height && dob && streetAddress, phone) {
+            if (!id) {
+                try {
+                    // await addDoc(collection(db, "criminals"), {
+                    //     ...formData,
+                    //     timestamp: serverTimestamp(),
+                    //     author: user.displayName,
+                    //     userId: user.uid,
+                    // });
+                    submitFinal(e);
+                    toast.success("Criminal Detail Uploaded successfully");
+                } catch (err) {
+                    toast.error("ERROR");
+                    console.log(err);
+                }
+            } else {
+                try {
+                    await updateDoc(doc(db, "criminals", id), {
+                        ...formData,
+                        timestamp: serverTimestamp(),
+                        author: user.displayName,
+                        userId: user.uid,
+                    });
+                    toast.success("Criminal Update is successfull");
+                } catch (err) {
+                    toast.error("ERROR");
+                    console.log(err);
+                }
+            }
         }
-        // }
-        // else {
-        //   toast.error("FAILEDDDD");
-        // }
+        else {
+            toast.error("ERROR");
+        }
+        navigate("/")
     }
+
+    // EXPERIMEMTAL
+    const [secondDoc, setSecondDoc] = useState(null);
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyAIZjyt4pcb3s6UzKciaB4wnbN8nizk_yA",
+        authDomain: "criminaldatabase-59f4c.firebaseapp.com",
+        projectId: "criminaldatabase-59f4c",
+        storageBucket: "criminaldatabase-59f4c.appspot.com",
+        messagingSenderId: "104472593863",
+        appId: "1:104472593863:web:1c44fd54ba1424681285e2"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const firestore = firebase.firestore();
+    // Reference the first collection
+    const firstCollection = firestore.collection("criminals");
+    // Reference the second collection
+    const secondCollection = firestore.collection("polices");
+    // Add a new document to the first collection with a reference to a document in the second collection
+
+    // FOCUS HERE
+
+    const submitFinal = () => {
+        firstCollection.add({
+            ...formData,
+            timestamp: serverTimestamp(),
+            author: user.displayName,
+            userId: user.uid,
+        });
+    }
+
+    // Update an existing document in the first collection with a reference to a different document in the second collection
+    // firstCollection.doc("firstDoc").update({
+    //     secondRef: secondCollection.doc("document2")
+    // });
+
+
+    // Retrieve the document in the second collection associated with a document in the first collection
+    // firstCollection.doc("firstDoc").get().then(firstDoc => {
+    //     const secondRef = firstDoc.data().secondRef;
+    //     secondRef.get().then(secondDoc => {
+    //         setSecondDoc(secondDoc.data());
+    //     });
+    // });
+
+    // EXPERIMEMTAL END
+
 
     return (
         <div className="criminalDataEntryContainer">
-            <h1 className='headerText'>Criminal Data Entry</h1>
+            {console.log(policesID)}
+            <h1 className='headerText'>{id ? "Update Criminal Data" : "Criminal Data Entry"}</h1>
             <div className="criminal-entry-container">
                 <form className="form-criminalEntry" onSubmit={handleSubmit}>
                     {/* {FULL-NAME} */}
                     <div>
+                        <span className='F-label'>FULL NAME</span>
                         <input
                             type="text"
                             className="form-input form-name"
@@ -145,22 +274,79 @@ const AddCriminalDetails = ({ user }) => {
                     </div>
                     {/* Image Upload */}
                     <div className="mb-3">
+                        <span className='F-label'>criminal Image</span>
+
                         <input
                             type="file"
                             className="form-control form-uploadImg"
                             onChange={(e) => setFile(e.target.files[0])}
                         />
                     </div>
+                    {/* {MOST WANTED?} */}
+
+                    <div className="mostWanted">
+                        <p className="mostWantedTitile">Most Wanted Criminal?</p>
+                        <div className="AskMostWantedgroupRadio">
+                            <div className="AskMostWantedsub">
+                                <input
+                                    type="radio"
+                                    className="radioButton"
+                                    value="yes"
+                                    name="radioOption"
+                                    checked={mostWanted === "yes"}
+                                    onChange={handleMostWanted}
+                                />
+                                <label htmlFor="radioOption" className="form-check-label">
+                                    Yes&nbsp;
+                                </label>
+                            </div>
+                            <div className="AskMostWantedsub">
+                                <input
+                                    type="radio"
+                                    className="radioButton"
+                                    value="no"
+                                    name="radioOption"
+                                    checked={mostWanted === "no"}
+                                    onChange={handleMostWanted}
+                                />
+                                <label htmlFor="radioOption" className="form-check-label">
+                                    No&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     {/* {TAGS} */}
-                    <div className="form-input form-tags">
+                    <div className="form-input form-tagsConatiner">
+                        <span className='F-label'>TAGS</span>
                         <ReactTagInput
+                            className="form-tags"
                             tags={tags}
                             placeholder="Tags"
                             onChange={handleTag}>
                         </ReactTagInput>
                     </div>
+                    {/* {Police Designation} */}
+                    <div className="form-category">
+                        <span className='F-label'>Police Designation</span>
+                        <select
+                            value={formData.policeDesignation}
+                            onChange={onPoliceDesignationChange}
+                            required
+                            className="form-category form-dropDown">
+                            <option>Police Designation</option>
+                            {/* CHANGES HERE */}
+                            {policesID.map((option, index) => (
+                                <option
+                                    value={option || ""}
+                                    key={index}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     {/* {Crime Category} */}
-                    <div className="">
+                    <div className="form-category">
+                        <span className='F-label'>Crime Category</span>
                         <select
                             value={formData.crimeCategory}
                             onChange={onCategoryChange}
@@ -178,19 +364,18 @@ const AddCriminalDetails = ({ user }) => {
                     </div>
                     {/* DOB */}
                     <div>
-                        <label>
-                            CRIMINAL DOB:
-                            <input
-                                type="date"
-                                name="dob"
-                                value={formData.dob}
-                                onChange={handleChange}
-                            />
-                        </label>
+                        <span className='F-label'>DATE OF BIRTH</span>
+                        <input
+                            type="date"
+                            name="dob"
+                            value={formData.dob}
+                            onChange={handleChange}
+                        />
                     </div>
 
                     {/* HEIGHT */}
                     <div>
+                        <span className='F-label'>HEIGHT</span>
                         <input
                             type="number"
                             className="form-input"
@@ -202,10 +387,11 @@ const AddCriminalDetails = ({ user }) => {
                     </div>
                     {/* {NATIONALITY} */}
                     <div className='form-dropDown'>
+                        <span className='F-label'>NATIONALITY</span>
                         <form action="" onChange={onCategoryNationality}>
-                            <select name="country">
+                            <select name="country"
                                 value={formData.nationality}
-                                className="form-dropDown"
+                                className="form-category form-dropDown">
                                 <option> Select Nationality</option>
                                 <option value="">Country...</option>
                                 <option value="Afghanistan">Afghanistan</option>
@@ -459,8 +645,8 @@ const AddCriminalDetails = ({ user }) => {
                         </form>
                     </div>
                     {/* ADDRESS */}
-                    <div>
-                        <h2 className='form-header-add'>Address</h2>
+                    <div className='C-addressConatiner'>
+                        <span className='F-label'>ADDRESS</span>
                         <form className='form-address' onChange={handleChange}>
                             <div>
                                 <label for="streetAddress">Street Address:</label>
@@ -481,7 +667,6 @@ const AddCriminalDetails = ({ user }) => {
                         </form>
                     </div>
 
-
                     {/* PHONE NUMBER */}
                     <div>
                         <input
@@ -495,8 +680,8 @@ const AddCriminalDetails = ({ user }) => {
                     </div>
                     {/* SUBMIT BTN */}
                     <div className="col-12 py-3 text-center">
-                        <button className="btn btn-add" type='submit' disabled={progress !== null && progress < 100}>
-                            Submit
+                        <button className="F-btn btn-add" type='submit' disabled={progress !== null && progress < 100}>
+                            {id ? "Update" : "Submit"}
                         </button>
                     </div>
                 </form>

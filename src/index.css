@@ -18,18 +18,28 @@ li {
 /* NAVBAR */
 .navbar {
   height: 10vh;
-  background-color: antiquewhite;
-  font-size: 2rem;
+  background-color: rgb(33, 132, 219);
+  font-size: 18px;
+  font-weight: 500;
   display: flex;
   flex-wrap: nowrap;
   align-content: flex-start;
   justify-content: space-between;
   align-items: center;
+  padding: 20px 0 10px 0;
 }
 
-.logo {
+.logoContainer {
   margin-left: 2.5rem;
   font-size: 4rem;
+}
+
+.Logo {
+  width: 200px;
+  object-fit: cover;
+  background-color: #63b5e4;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .nav--items {
@@ -40,6 +50,8 @@ li {
   margin-right: 3%;
 }
 .nav--item {
+  /* text-transform: uppercase; */
+  color: rgb(225, 225, 225);
   margin-left: 20px;
   display: inline-block;
   text-decoration: none;
@@ -47,7 +59,8 @@ li {
 
 .logo:hover,
 .nav--item:hover {
-  color: rgb(148, 95, 95);
+  color: rgb(245, 188, 188);
+
   text-decoration: underline;
   transform: scale(1.02);
   transition: 0.3s all ease;
@@ -107,12 +120,9 @@ li {
 }
 
 /* TODO:last css change */
-.form-tags,
+.form-tags {
+}
 .form-input {
-  border: 1px solid black;
-  width: 40rem;
-  height: 2.5rem;
-  padding: 0.5rem;
   margin-bottom: 2rem;
 }
 
@@ -154,19 +164,38 @@ li {
 }
 
 .profile-logo-header {
-  width: 30px;
+  width: 25px;
   height: 30px;
   border-radius: 50%;
 }
 
 .profile-name-header {
-  font-size: 0.9em;
+  background-color: #0014395b;
+  padding: 10px;
+  border-radius: 10px;
+  color: #212432;
+  font-size: 18px;
+  white-space: nowrap;
+  /* border: 1px solid red; */
+  margin-right: -10px;
+  line-height: 20px;
+}
+
+.login-logout {
+  display: inline-block;
+  /* border: 2px solid red; */
+  font-size: 20px;
+  background-color: #001439;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /*CRIMINAL DATA ENTRY!!!!*/
 .headerText {
+  position: relative;
+  top: -20px;
   text-align: center;
-  margin-top: 0;
+  margin-top: -10px;
   padding-top: 2rem;
   font-size: 3rem;
 }
@@ -174,6 +203,26 @@ li {
 .criminalDataEntryContainer {
   color: burlywood;
   background-color: rgb(38, 42, 56);
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.criminalDataEntryContainer label {
+  margin-bottom: 10px;
+}
+
+.C-addressConatiner {
+  margin-top: 50px;
+}
+
+.F-label {
+  background-color: rgb(55, 61, 83);
+  padding: 6px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
 .criminal-entry-container {
@@ -184,9 +233,19 @@ li {
   align-items: center;
 }
 
-.btn {
+.F-btn {
   width: 300px;
   height: 50px;
+  background-color: #57df90;
+  border: none;
+  border-radius: 10px;
+  font-size: 25px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.F-btn:hover {
+  transform: scale(1.03);
+  transition: 0.3s ease-in;
 }
 
 .form-criminalEntry {
@@ -202,6 +261,7 @@ li {
 .form-dropDown {
   height: 30px;
   width: 300px;
+  margin-bottom: 40px;
 }
 
 /* .form-address {
@@ -255,9 +315,9 @@ li {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* INPUT COLOR */
 .form-criminalEntry input::placeholder {
-  /* color: #aaa; */
-  color: rgb(0, 0, 0);
+  color: inherit;
 }
 
 .form-criminalEntry *:focus {
@@ -272,12 +332,13 @@ li {
 
 /* CRIMINAL CARDS */
 .criminalCardMainContainer {
-  /* border: 2px solid red; */
+  justify-content: space-evenly;
   padding: 20px;
   display: flex;
-  gap: 20px;
+  gap: 30px;
   align-items: center;
   flex-wrap: wrap;
+  row-gap: 40px;
 }
 
 /* CRIMINAL CARD */
@@ -289,28 +350,45 @@ li {
 }
 
 .criminalCardConatiner {
+  /* border: 2px solid red; */
   font-family: Inter;
   font-size: 22px;
-  width: 550px;
-  height: 400px;
+  width: 400px;
+  height: 280px;
+  /* width: 550px;
+  height: 400px; */
   background-color: #dfcfcf;
   text-align: center;
   gap: 17px;
   border-radius: 35px;
   margin: 0 auto;
-  padding: 40px 0 40px 0;
+  padding: 50px 0 50px 0;
+}
+
+.criminalCardConatiner:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease-in;
+}
+
+.policeCardContainer {
+  background-color: #4e719888;
 }
 
 .criminalImage img {
   background-color: #cb6262;
-  height: 165px;
-  width: 165px;
+  height: 100px;
+  width: 100px;
+  /* height: 165px;
+  width: 165px; */
   border-radius: 50%;
   border: 4px solid rgb(29, 35, 34);
 }
 
 .criminalName {
-  font-size: 35px;
+  /* border: 1px solid red; */
+  white-space: nowrap;
+  font-size: 20px;
+  /* font-size: 35px; */
   font-weight: 500;
 }
 
@@ -318,10 +396,25 @@ li {
   display: flex;
   flex-direction: row;
   gap: 20px;
-  width: 70%;
+  width: 75%;
+  padding: 5px;
+  /* width: 70%; */
   height: 50%;
   background-color: #da6e6e;
-  font-size: 22px;
+  font-size: 18px;
+  white-space: nowrap;
+  font-weight: 500;
+  /* font-size: 22px; */
+  border-radius: 10px;
+}
+
+.policeDesignation {
+  background-color: #50689f;
+}
+
+.policeNameConatiner {
+  background-color: #0098f04d;
+  padding: 5px;
   border-radius: 10px;
 }
 
@@ -332,24 +425,49 @@ li {
   width: 70%;
   height: 50%;
   background-color: #c1a2a2;
-  font-size: 22px;
+  /* font-size: 22px; */
+  font-size: 17px;
+  padding: 5px;
   border-radius: 10px;
 }
 
-.btn-criminalReadMore {
-  height: 45px;
+.criminalReadMoreContainer {
+  height: 35px;
   width: 200px;
   border-radius: 20px;
-  text-decoration: none;
-  outline: none;
   background-color: #b54646;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   font-size: 22px;
+  text-decoration: none;
+}
+
+.btn-criminalReadMore {
+  background-color: #b54646;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.btn-edit {
+  width: 130px;
+  /* background-color: #cf8686; */
+  background-color: #56cb79;
+  outline: none;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 20px;
+  text-decoration: none;
 }
 
 .btn-delete {
-  width: 200px;
-  background-color: #cf8686;
+  width: 130px;
+  /* width: 200px; */
+  background-color: #d92e2e;
   outline: none;
   height: 40px;
   border: 2px solid black;
@@ -359,24 +477,18 @@ li {
 }
 
 .btnF {
+  text-decoration: none;
   font-size: 20px;
   transform: scale(1.03);
   transition: 0.3s ease;
+}
+.btn-criminalReadMore {
+  text-decoration: none;
 }
 
 .btnF:hover {
   transform: scale(1.1);
   transition: 0.3s ease;
-}
-
-.btn-edit {
-  width: 200px;
-  background-color: #d92e2e;
-  outline: none;
-  height: 40px;
-  border: 2px solid black;
-  border-radius: 20px;
-  text-decoration: none;
 }
 
 .CardfooterElements {
@@ -594,4 +706,333 @@ li {
 }
 .notFoundImage {
   height: 90vh;
+}
+
+/* HOME DESIGNES */
+.homeContainer {
+  font-size: 20px;
+  background-color: #0099f0;
+  height: 85vh;
+  display: flex;
+}
+
+.homeLeftConatiner {
+  padding: 20px;
+  width: 50vw;
+  background-color: #22658b;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 60px;
+}
+
+.homeBodyHeadingText {
+  color: #0099f0;
+}
+.mainBodyText {
+  font-size: 60px;
+  font-weight: 700;
+  color: #c4dbee;
+}
+
+.mainBodyFooterText {
+  font-size: 17px;
+  color: #dfcfcf9e;
+  line-height: 25px;
+}
+
+.homeBtn {
+  height: 50px;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  background-color: #0099f0;
+}
+.homeBtn:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease-in;
+}
+
+.homeRightConatiner {
+  width: 50vw;
+  background-color: #077bbe;
+}
+.homeRightImage {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+/* DEPARTMENT */
+
+.departmentConatiner {
+  margin-top: 20px;
+  background-color: #eff4f7;
+}
+
+.departmentHeader {
+  background-color: #a1b9c7;
+  display: inline-block;
+  width: 400px;
+  padding: 5px 10px 0 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 600;
+  margin-left: 20px;
+}
+
+.departmentCards {
+  margin-top: 10px;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.departmentCard {
+  border: 1px solid red;
+  background-color: #d1dbe1;
+  border-radius: 10px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.D-cardHeading {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.D-cardBody {
+  font-size: 15px;
+}
+
+.D-cardfooter {
+  font-size: 15px;
+}
+
+.departmentCard:hover {
+  transform: scale(1.05);
+  transition: 0.1s ease-in;
+}
+
+/* VISION AND MISSION */
+
+.VissionMainConatiner {
+  background-color: #d0dae0;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.V-Header {
+  font-size: 14px;
+  font-weight: 700;
+  color: #316aff;
+  letter-spacing: 1.3px;
+  margin-bottom: 10px;
+}
+
+.VissionAndMissionConatiner {
+  display: flex;
+  gap: 50px;
+}
+
+.VissionAndMissionConatiner > div {
+  width: 50%;
+}
+.V-leftContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.V-leftHeader {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 44.2px;
+  color: rgb(0, 20, 57);
+  text-align: left;
+}
+
+.V-leftHeader-desc {
+  font-size: 15px;
+  line-height: 24px;
+  /* color: rgb(117, 121, 138); */
+  margin-bottom: 20px;
+}
+
+.V-vissionConatiner {
+  background-color: #eaf1ff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 30px;
+}
+
+.V-vissionHeader {
+  font-size: 24px;
+  font-weight: 600;
+}
+.PointLine {
+  height: 4px;
+  width: 70px;
+  background: #316aff;
+}
+
+.V-vissionDesc {
+  font-size: 16px;
+}
+
+.M-rightContainer {
+  border-radius: 10px;
+  background-color: #001439;
+  color: #eff4f7;
+  padding: 20px;
+  position: relative;
+  bottom: 20px;
+}
+
+.M-missionPoints {
+  margin-bottom: -30px;
+}
+.M-header {
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.M-pointContainer {
+  display: flex;
+}
+
+.M-point {
+  margin-bottom: 40px;
+}
+
+.M-pointContainer .PointLine {
+  width: 50px;
+  height: 2px;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.M-pointsHeader {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.M-pointsDesc {
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/* FOOTER */
+.footerConatiner {
+  height: 500px;
+  background-color: #050318;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-top: 30px;
+  flex-flow: row wrap;
+  row-gap: 40px;
+}
+
+.F-footerHeader {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+.F-footerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.F-footerContent a {
+  text-decoration: none;
+}
+
+.F-list {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.F-list:hover {
+  color: #0099f0;
+  transition: 0.3s ease-in;
+}
+
+ul li {
+  text-decoration: none;
+  list-style: none;
+  margin-right: 40px;
+}
+
+.F-emergencyDesc {
+  font-size: 16px;
+  color: #a9aba5;
+}
+
+.F-emergencyCard {
+  height: 94px;
+  width: 294px;
+  background-color: #001439;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.F-phoneIcon {
+  background-color: #3c6ce8;
+  width: 53px;
+  height: 53px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+.F-emergencyCardNumber {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.F-logoContainer {
+  order: 2;
+}
+
+.F-logoContainer:hover {
+  transform: scale(1.05);
+  transition: 0.2s ease-in;
+}
+
+break {
+  flex-basis: 100%;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}
+
+.F-ContactUs .F-list:hover {
+  color: #ffffff;
 }

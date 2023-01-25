@@ -6,16 +6,19 @@ import Home from "./pages/Home"
 import Police from "./pages/Police"
 import Criminals from "./pages/Criminals"
 import CriminalDetail from "./pages/CriminalDetail"
+import PoliceDetail from "./pages/PoliceDetail"
 import Editing from "./pages/Editing"
 import Department from "./pages/Department"
 import Auth from "./pages/Auth"
 import CrimeCategory from "./pages/CrimeCategory"
 import AddCriminalDetails from "./pages/AddCriminalDetails"
+import AddPoliceDetails from "./pages/AddPoliceDetails"
 import NotFound from "./pages/NotFound"
 import Header from './components/Header'
 import 'react-toastify/dist/ReactToastify.css';
 import { auth } from "./firebase"
 import { signOut } from 'firebase/auth'
+import Footer from './components/Footer'
 
 function App() {
   const [active, setActive] = useState("home")
@@ -55,18 +58,25 @@ function App() {
       <Routes>
         <Route path='/' element={<Home setActive={setActive} user={user} />} />
         <Route path='/department' element={<Department />} />
-        <Route path='/police' element={<Police />} />
+        <Route path='/police' element={<Police user={user} setActive={setActive} />} />
         <Route path='/Criminals' element={<Criminals setActive={setActive} user={user} />} />
         {/* <Route path='/create' element={<Editing />} /> */}
         <Route path='/AddCriminalDetails' element={user?.uid ? <AddCriminalDetails user={user} setActive={setActive} /> : <Navigate to="/" />} />
+        <Route path='/AddPoliceDetails' element={user?.uid ? <AddPoliceDetails user={user} setActive={setActive} /> : <Navigate to="/" />} />
         <Route path='/Category' element={<CrimeCategory user={user} />} />
         <Route path='/auth' element={<Auth setActive={setActive} setUser={setUser} />} />
 
         <Route path='/CriminalDetail/:id' element={<CriminalDetail setActive={setActive} />} />
+        <Route path='/PoliceDetail/:id' element={<PoliceDetail setActive={setActive} />} />
         {/* <Route path='/update:id' element={user?.uid ? <Editing user={user} /> : <Navigate to="/" />} /> */}
-        <Route path='/update/:id' element={user?.uid ? <AddCriminalDetails user={user} setActive={setActive} /> : <Navigate to="/" />} />
+        <Route path='/updatecriminal/:id' element={user?.uid ? <AddCriminalDetails user={user} setActive={setActive} /> : <Navigate to="/" />} />
+        <Route path='/updatepolice/:id' element={user?.uid ? <AddPoliceDetails user={user} setActive={setActive} /> : <Navigate to="/" />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer
+        setActive={setActive}
+        active={active}
+        user={user} />
     </div>
   )
 }

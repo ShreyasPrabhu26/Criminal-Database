@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import 'react-toastify/dist/ReactToastify.css';
 
-
+// add some extra details only to add some major inspectors
 const initialState = {
   firstName: "",
   lastName: "",

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// import Logo from "../images/Logo2.png"
+import Logo from "../images/Logo.png"
 
 
 const Header = ({ active, setActive, user, handleLogout }) => {
@@ -7,16 +9,21 @@ const Header = ({ active, setActive, user, handleLogout }) => {
     const userId = user?.uid;
     const displayName = user?.displayName;
 
+    // ONLY THESE PEOPLE CAN ADD POLICE DETAILS{
+    // "Director General of Police",
+    // "Police Inspector",
+    // "Assistant Police Inspector"}
 
     return (
         <div>
             <div className="navbar">
                 <Link to="/">
                     <div
-                        className={`logo ${active === "home" ? "active" : ""}`}
+                        className={`logoContainer ${active === "home" ? "active" : ""}`}
                         onClick={() => setActive("home")}
                     >
-                        Logo
+                        {/* Logo */}
+                        <img className="Logo" src={Logo} alt='Logo' />
                     </div>
                 </Link>
                 <div className="nav--items">
@@ -31,7 +38,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                         <a className={`nav--item ${active === "department" ? "active" : ""}`}
                             onClick={() => setActive("department")}
                             href="">
-                            Police
+                            Officers
                         </a>
                     </Link>
                     <Link to="/Criminals">
@@ -48,7 +55,17 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                             Categery
                         </a>
                     </Link>
-                    
+
+                    {/* {ONLY SHREYAS CAN ADD THE CRIMINAL DETAILS AS OF NOW} */}
+                    {displayName == "Shreyas Prabhu" &&
+                        <Link to="/AddPoliceDetails">
+                            <a className={`nav--item ${active === "AddPoliceDetails" ? "active" : ""}`}
+                                onClick={() => setActive("AddPoliceDetails")}
+                                href="">
+                                AddPoliceDetails
+                            </a>
+                        </Link>
+                    }
                     {/* {ONLY SHREYAS CAN ADD THE CRIMINAL DETAILS AS OF NOW} */}
                     {displayName == "Shreyas Prabhu" &&
                         <Link to="/AddCriminalDetails">
@@ -77,7 +94,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                             </p>
                             {/* JAKE MADIDENE */}
                             <Link to="/">
-                                <a className={`nav--item ${active === "department" ? "active" : ""}`}
+                                <a className={`nav--item login-logout ${active === "department" ? "active" : ""}`}
                                     // onClick={() => setActive("department") }
                                     onClick={handleLogout}
                                     href="">
@@ -91,7 +108,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                         (
                             <>
                                 <Link to="/auth">
-                                    <a className={`nav--item ${active === "department" ? "active" : ""}`}
+                                    <a className={`nav--item login-logout ${active === "department" ? "active" : ""}`}
                                         onClick={() => setActive("login")}
                                         href="">
                                         Login
