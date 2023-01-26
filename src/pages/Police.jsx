@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 import Tags from '../components/Tags';
 import TagsPage from "./TagsPage"
 import PoliceCards from '../components/PoliceCards';
-
+import ScrollToTop from '../utility/ScrollToTop'
+import AboutPolice from "../components/AboutPolice"
 
 const Police = ({ user, setActive }) => {
 
@@ -58,7 +59,8 @@ const Police = ({ user, setActive }) => {
 
   return (
     <div>
-      <h1>Police</h1>
+      <ScrollToTop />
+      <AboutPolice />
       <PoliceCards polices={polices} user={user} handleDelete={handleDelete} />
     </div>
   )

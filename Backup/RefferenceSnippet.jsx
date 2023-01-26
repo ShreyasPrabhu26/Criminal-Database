@@ -31,7 +31,47 @@ function YourComponent() {
                 setSecondDoc(secondDoc.data());
             });
         });
+
+
+        // useEffect(() => {
+    //     firstCollection
+    //         .doc(id)
+    //         .get()
+    //         .then((firstDoc) => {
+    //             // if (firstDoc.exists) {
+    //             if (firstDoc.exists) {
+    //                 const policeDesignation = firstDoc.data()?.policeDesignation;
+    //                 //assuming secondRef is the name of the property in firstDoc that holds the reference to the second document
+    //                 if (policeDesignation) {
+    //                     policeDesignation.get() // this is the reference to the second document
+    //                         .then((secondDoc) => {
+    //                             if (secondDoc.exists) {
+    //                                 setSecondDoc(secondDoc.data());
+    //                             } else {
+    //                                 console.log("No such document in second collection!");
+    //                             }
+    //                         });
+    //                 } else {
+    //                     console.log("No secondRef property found in firstDoc data");
+    //                 }
+    //             } else {
+    //                 console.log("No such document in first collection!");
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log("Error getting document:", error);
+    //         });
+    // }, [id])
+
+
+
+
     }, []);
+
+
+
+
+
     return (
         <div>
             {secondDoc && <p>{secondDoc.name}</p>}

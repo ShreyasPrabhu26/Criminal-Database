@@ -1,5 +1,6 @@
 import React from 'react'
 import VisionAndMission from '../components/VisionAndMission'
+import ScrollToTop from '../utility/ScrollToTop'
 
 const Department = () => {
 
@@ -16,6 +17,7 @@ const Department = () => {
   }
   return (
     <div>
+      <ScrollToTop />
       <VisionAndMission />
       <div className="departmentConatiner">
         <div className="departmentHeader">

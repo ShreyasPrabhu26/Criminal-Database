@@ -501,11 +501,13 @@ li {
   background-color: #afa8a8;
   margin: 0 auto;
   width: 97vw;
-  height: 100vh;
+  height: 1000px;
   padding: 20px;
 }
 
 .DETAIL-criminalDetailHeader {
+  text-transform: uppercase;
+  font-weight: 500;
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
@@ -525,7 +527,39 @@ li {
   border-radius: 50%;
   height: 175px;
   width: 175px;
-  border: 2px solid black;
+  border: 2px solid rgb(17, 84, 218);
+  background-color: #c0bdd7;
+}
+
+.DETAIL-crimeTypeContainer {
+  background-color: #d44040;
+  white-space: nowrap;
+  border: 1px solid black;
+}
+
+.DETAIL-policeDesignation {
+  background-color: #66bdbd !important;
+  border: 2px solid rgb(17, 84, 218);
+  width: auto;
+}
+
+.officer-header {
+  background-color: #5796b4 !important;
+  outline: 1px solid rgb(7, 130, 112);
+}
+
+.officer-name {
+  background-color: #549dbe !important;
+  outline: 2px solid rgb(7, 130, 112);
+}
+
+.DETAIL-crimeTypeCategoryCon {
+  background-color: #549dbe;
+  outline: 2px solid rgb(7, 130, 112);
+  width: 350px;
+  height: 35px;
+  text-align: center;
+  border-radius: 20px;
 }
 
 /* .DETAIL-crimeTypeImage {
@@ -535,14 +569,22 @@ li {
 .DETAIL-criminalNameContainer,
 .DETAIL-crimeTypeContainer {
   background-color: #fd5656;
-  width: 350px;
+  width: 400px;
   height: 35px;
   text-align: center;
   border-radius: 20px;
 }
 
-.DETAIL-crimeTypeContainer {
-  background-color: #d44040;
+.DETAIL-crimeTypeCon {
+  background-color: #c83241;
+  border: 1px solid black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.DETAIL-crimeTypeName {
+  background-color: #c71b2c;
+  border: 1px solid black;
 }
 
 .DETAIL-criminalName,
@@ -565,6 +607,7 @@ li {
   justify-content: center;
   align-items: center;
 }
+
 .DETAIL-criminalFullInformationGrey {
   background-color: #d9d9d9;
   width: 96%;
@@ -578,14 +621,31 @@ li {
   gap: 40px;
 }
 
+.DETAIL-criminalFullInformationGrey > div:nth-child(odd) {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  background-color: #a5a699;
+  height: 60px;
+  padding: 1px;
+  margin: 5px;
+}
+.DETAIL-criminalFullInformationGrey > div:nth-child(even) {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  background-color: #849a9f;
+  height: 60px;
+  padding: 1px;
+  margin: 5px;
+}
+
 .DETAIL-entityInfoGroup {
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 20px;
-  /* border: 1px solid red; */
   border-radius: 20px;
-  /* padding: 10px; */
 }
 
 .DETAIL-entityInfoGroup > div {
@@ -594,12 +654,39 @@ li {
 }
 
 .DETAIL-DetailIcon {
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 50px;
   width: 50px !important;
   background-color: #d44040;
   border-radius: 10px;
   align-self: flex-start;
+  margin-top: 5px;
+}
+
+.DETAIL-DetailIconPolice {
+  background-color: #4b5aa7;
+}
+.no-background {
+  background-color: inherit;
+}
+
+.countryFlagIcon {
+  border-radius: 15px;
+}
+
+.DETAIL-entityName {
+  background-color: #bac5cb;
+  width: 250px !important;
+  white-space: nowrap;
+  border-radius: 10px;
+}
+.DETAIL-entityValue {
+  background-color: #9abdc0;
+  width: 400px !important;
+  border-radius: 10px;
 }
 
 /* Loading Spinner */
@@ -714,6 +801,7 @@ li {
   background-color: #0099f0;
   height: 85vh;
   display: flex;
+  margin-bottom: 150px;
 }
 
 .homeLeftConatiner {
@@ -1035,4 +1123,125 @@ break {
 
 .F-ContactUs .F-list:hover {
   color: #ffffff;
+}
+
+/* ABOUT-US */
+
+.aboutPoliceComponent {
+  margin-bottom: 150px;
+}
+
+.aboutPoliceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 70vh;
+  margin: 0 auto;
+  margin-top: 150px;
+}
+
+.aboutPoliceContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.aboutPoliceContainer img:hover {
+  transform: scale(1.03);
+  transition: 0.3s ease-in;
+}
+
+.left-aboutPoliceContainer {
+  width: 50%;
+}
+.right-aboutPoliceContainer {
+  /* background-color: #0c4b6f; */
+  width: 50%;
+}
+
+.flex-aboutPoliceConatiner {
+  gap: 5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-img1 {
+  height: 600px;
+  width: 1500px;
+}
+.about-img2,
+.about-img3 {
+  height: 300px;
+  width: 270px;
+}
+
+.right-aboutPoliceContainer {
+  padding: 25px;
+  background-color: #eaf0e9;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  height: 550px;
+}
+.aboutPolice {
+  color: #316aff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.aboutPoliceHeader {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.aboutPoliceDescription {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.aboutPolicePoints {
+  font-size: 16px;
+  display: flex;
+}
+.aboutPoliceSVG {
+  stroke: #001439;
+  stroke-width: 2.5px;
+  width: 20px;
+  height: 20px;
+}
+.aboutPolicePoint {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.aboutPoliceBtn {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  margin: 0 auto;
+  margin-top: 30px;
+  justify-self: center;
+  align-self: center;
+}
+
+.exploreOfficers {
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 18px 32px 18px 32px;
+  border: none;
+  background-color: #001439;
+  color: white;
+  letter-spacing: 1.5px;
+}
+.exploreOfficers:hover {
+  transform: scale(1.03);
+  transition: 0.15s ease-in;
 }

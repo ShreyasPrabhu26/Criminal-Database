@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import ScrollToTop from '../utility/ScrollToTop'
 
 
 const AddPoliceDetails = ({ user, setActive }) => {
@@ -46,8 +47,8 @@ const AddPoliceDetails = ({ user, setActive }) => {
         "Assistant Police Inspector",
         "Police Sub-Inspector ",
         "Assistant Police Sub-Inspector",
-        "Head Constable ",
-        "Police Constable ",
+        "Head Constable",
+        "Police Constable",
     ]
 
     const handleChange = (e) => {
@@ -154,6 +155,7 @@ const AddPoliceDetails = ({ user, setActive }) => {
 
     return (
         <div>
+            <ScrollToTop />
             <div className="criminalDataEntryContainer">
                 <h1 className='headerText'>{id ? "Update Police Data" : "Police Data Entry"}</h1>
                 <div className="criminal-entry-container">

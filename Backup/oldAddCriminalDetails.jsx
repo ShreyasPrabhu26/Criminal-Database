@@ -15,7 +15,6 @@ import {
 } from "firebase/firestore";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import ScrollToTop from '../utility/ScrollToTop'
 
 // EXPERIMEMTAL
 import 'firebase/compat/auth';
@@ -27,6 +26,7 @@ import firebase from 'firebase/compat/app';
 const AddCriminalDetails = ({ user, setActive }) => {
 
     const [polices, setPolices] = useState([]);
+    const [policesID, setPolicesID] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -34,11 +34,14 @@ const AddCriminalDetails = ({ user, setActive }) => {
             collection(db, "polices"),
             (snapshot) => {
                 let list = [];
+                let policesID = [];
                 snapshot.docs.forEach((doc) => {
-                    // list.push({ id: doc.data().userId, name: doc.data().fullName });
-                    list.push({ id: doc.id, name: doc.data().fullName });
+                    list.push(doc.data().fullName);
+                    policesID.push(doc.id);
+
                 })
                 setPolices(list);
+                setPolicesID(policesID);
                 setLoading(false);
                 setActive("home")
             }, (error) => {
@@ -89,7 +92,6 @@ const AddCriminalDetails = ({ user, setActive }) => {
 
     const onPoliceDesignationChange = (e) => {
         setForm({ ...formData, policeDesignation: secondCollection.doc(e.target.value) });
-        // setForm({ ...formData, policeDesignation: e.target.value });
         // Reference to the document in the second collection
     };
 
@@ -185,13 +187,12 @@ const AddCriminalDetails = ({ user, setActive }) => {
                 }
             } else {
                 try {
-                    // await updateDoc(doc(db, "criminals", id), {
-                    //     ...formData,
-                    //     timestamp: serverTimestamp(),
-                    //     author: user.displayName,
-                    //     userId: user.uid,
-                    // });
-                    updateFinal();
+                    await updateDoc(doc(db, "criminals", id), {
+                        ...formData,
+                        timestamp: serverTimestamp(),
+                        author: user.displayName,
+                        userId: user.uid,
+                    });
                     toast.success("Criminal Update is successfull");
                 } catch (err) {
                     toast.error("ERROR");
@@ -205,7 +206,8 @@ const AddCriminalDetails = ({ user, setActive }) => {
         navigate("/")
     }
 
-    // EXPERIMEMTAL FOR REFERENCE
+    // EXPERIMEMTAL
+    const [secondDoc, setSecondDoc] = useState(null);
     // Initialize Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyAIZjyt4pcb3s6UzKciaB4wnbN8nizk_yA",
@@ -234,73 +236,26 @@ const AddCriminalDetails = ({ user, setActive }) => {
         });
     }
 
-    const updateFinal = () => {
-        firstCollection.doc(id).update({
-            ...formData,
-            timestamp: serverTimestamp(),
-            author: user.displayName,
-            userId: user.uid,
-        });
-    }
+    // Update an existing document in the first collection with a reference to a different document in the second collection
+    // firstCollection.doc("firstDoc").update({
+    //     secondRef: secondCollection.doc("document2")
+    // });
+
 
     // Retrieve the document in the second collection associated with a document in the first collection
-
-    // ==========APPROACH-I =====================
-
-    // const [secondDoc, setSecondDoc] = useState(null);
-    // useEffect(() => {
-    //     firstCollection
-    //         .doc(id)
-    //         .get()
-    //         .then((firstDoc) => {
-    //             if (firstDoc.exists) {
-    //                 const policeDesignation = firstDoc.data()?.policeDesignation;
-    //                 if (policeDesignation) {
-    //                     policeDesignation.get().then((secondDoc) => {
-    //                         if (secondDoc.exists) {
-    //                             setSecondDoc(secondDoc.data());
-    //                             console.log(secondDoc);
-    //                         } else {
-    //                             console.log("No such document!");
-    //                         }
-    //                     });
-    //                 } else {
-    //                     console.log("No policeDesignation property found in firstDoc data");
-    //                 }
-    //             } else {
-    //                 console.log("No such document!");
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log("Error getting document:", error);
-    //         });
-    // }, [])
-
-    // ==========APPROACH-II =====================
-
-    // const [secoundDoc,setSecondDoc] = useState(null);
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         try {
-    //             const firstDoc = await firebase.firestore().collection("criminals").doc(id).get();
-    //             console.log(firstDoc.data());
-    //             const secondDocRef = firstDoc.data().policeDesignation;
-    //             const secondDocData = await secondDocRef.get();
-    //             setSecondDoc(secondDocData.data());
-    //         } catch (error) {
-    //             console.log("Error getting document:", error);
-    //         }
-    //     }
-    //     fetchData();
-    // }, [id]);
-
+    // firstCollection.doc("firstDoc").get().then(firstDoc => {
+    //     const secondRef = firstDoc.data().secondRef;
+    //     secondRef.get().then(secondDoc => {
+    //         setSecondDoc(secondDoc.data());
+    //     });
+    // });
 
     // EXPERIMEMTAL END
 
 
     return (
         <div className="criminalDataEntryContainer">
-            <ScrollToTop />
+            {console.log(policesID)}
             <h1 className='headerText'>{id ? "Update Criminal Data" : "Criminal Data Entry"}</h1>
             <div className="criminal-entry-container">
                 <form className="form-criminalEntry" onSubmit={handleSubmit}>
@@ -374,17 +329,17 @@ const AddCriminalDetails = ({ user, setActive }) => {
                     <div className="form-category">
                         <span className='F-label'>Police Designation</span>
                         <select
-                            value={formData.policeId}
+                            value={formData.policeDesignation}
                             onChange={onPoliceDesignationChange}
                             required
                             className="form-category form-dropDown">
                             <option>Police Designation</option>
                             {/* CHANGES HERE */}
-                            {polices.map((option, index) => (
+                            {policesID.map((option, index) => (
                                 <option
-                                    value={option.id || ""}
+                                    value={option || ""}
                                     key={index}>
-                                    {option.name}
+                                    {option}
                                 </option>
                             ))}
                         </select>

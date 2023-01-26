@@ -7,6 +7,7 @@ import Spinner from '../components/spinner';
 import { toast } from "react-toastify";
 import Tags from '../components/Tags';
 import TagsPage from "./TagsPage"
+import ScrollToTop from '../utility/ScrollToTop'
 
 const Criminals = ({ setActive, user }) => {
 
@@ -58,6 +59,7 @@ const Criminals = ({ setActive, user }) => {
 
   return (
     <div>
+            <ScrollToTop />
       {/* ADD SOMETHING WHICH ADDS THE INFO ON CRIMINAL HEADER */}
       <h1>Criminals</h1>
       <CriminalCards criminals={criminals} user={user} handleDelete={handleDelete} />

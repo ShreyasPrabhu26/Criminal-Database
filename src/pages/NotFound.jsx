@@ -1,8 +1,11 @@
 import React from 'react'
+import ScrollToTop from '../utility/ScrollToTop'
+
 
 const NotFound = () => {
   return (
     <div>
+      <ScrollToTop />
       <div className="notfoundImageContainer">
         <img
           className="notFoundImage"
