@@ -597,7 +597,6 @@ li {
 .DETAIL-criminalFullInformationBlue {
   /* master-font-size */
   font-size: 29px;
-
   background-color: #95c0d9;
   margin: 0 auto;
   width: 80vw;
@@ -628,7 +627,7 @@ li {
   background-color: #a5a699;
   height: 60px;
   padding: 1px;
-  margin: 5px;
+  margin: -20px 5px;
 }
 .DETAIL-criminalFullInformationGrey > div:nth-child(even) {
   display: flex;

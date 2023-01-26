@@ -199,7 +199,7 @@ const CriminalDetail = ({ setActive }) => {
               <img className="DETAIL-crimeTypeImage" src={police?.imgUrl} alt={police?.policeDesignation} />
             </div>
             <div className="DETAIL-crimeTypeContainer DETAIL-policeDesignation ">
-              <span className="DETAIL-crimeType">{police?.policeDesignation}</span>
+              <span className="DETAIL-crimeType">{police?.fullName}</span>
             </div>
           </div>
 

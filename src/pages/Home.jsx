@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div>
       <ScrollToTop />
-      {/* 
+
       <div className="homeContainer">
         <div className="homeLeftConatiner">
           <span className="homeBodyHeadingText">
@@ -34,7 +34,7 @@ const Home = () => {
         </div>
       </div>
       {<AboutPolice />}
-      <VisionAndMission /> */}
+      <VisionAndMission />
     </div>
   )
 }

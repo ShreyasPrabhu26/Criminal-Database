@@ -80,7 +80,7 @@ const Auth = ({ setActive, setUser }) => {
           <h2>{signUp ? "Sign-Up" : "Sign-In"}</h2>
         </div>
 
-        <div className="form-container">
+        <div className="form-container form-criminalEntry">
           <form action="" onSubmit={handleAuth}>
             {/* FIRST NAME */}
             {signUp && (
@@ -88,7 +88,7 @@ const Auth = ({ setActive, setUser }) => {
                 <div>
                   <input
                     type="text"
-                    className="form-input form-email"
+                    className="form-input form-name"
                     placeholder="First Name"
                     name="firstName"
                     value={firstName}
