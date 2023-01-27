@@ -35,11 +35,12 @@ li {
 }
 
 .Logo {
-  width: 200px;
   object-fit: cover;
   background-color: #63b5e4;
   border-radius: 10px;
   padding: 5px;
+  height: 70px;
+  width: 100px;
 }
 
 .nav--items {
@@ -689,6 +690,12 @@ li {
 }
 
 /* Loading Spinner */
+
+.loadingSppiner {
+  font-size: large;
+  font-weight: 500;
+  text-align: center;
+}
 .spinnerContainer {
   margin: 0 auto;
 }

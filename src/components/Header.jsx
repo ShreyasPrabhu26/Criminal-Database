@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import Logo from "../images/Logo2.png"
-import Logo from "../images/Logo.png"
+import Logo from "../images/Logo2.png"
+// import Logo from "../images/Logo.png"
 
 
 const Header = ({ active, setActive, user, handleLogout }) => {

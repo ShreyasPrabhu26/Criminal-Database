@@ -10,7 +10,7 @@ const VisionAndMission = () => {
                         <div className="V-leftHeader">
                             Our Vision And Mission
                         </div>
-                        <span className="V-leftHeader-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore omnis quos ipsam accusantium! Eos libero debitis tempore neque facere modi officia id dolorum? Facilis vel nostrum corporis, libero commodi odio.</span>
+                        <span className="V-leftHeader-desc">A police department's mission is to serve and protect the community by enforcing laws and maintaining order. A vision statement is a statement of an organization's overarching goals and aspirations, that gives direction and provides a clear sense of purpose. For example, a police department's vision statement might be something like "To ensure the safety and well-being of all members of our community through fair and impartial policing."..</span>
 
                         <div className="V-vissionConatiner">
                             <div className="V-vissionHeader">
@@ -18,7 +18,7 @@ const VisionAndMission = () => {
                             </div>
                             <div className="PointLine"></div>
                             <span className='V-vissionDesc'>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus doloribus numquam porro odio consequatur ratione. Similique nihil ullam iste unde, eaque corrupti necessitatibus laborum, dignissimos quis blanditiis possimus quos odit!
+                                The vision of the Karnataka Police Department is to be a model of excellence in law enforcement, known for our commitment to community policing and our ability to build strong partnerships with community members and organizations. We strive to create a safe and secure environment for all members of our community, and to be recognized as a leader in the field of law enforcement.
                             </span>
                         </div>
                     </div>
@@ -35,25 +35,25 @@ const VisionAndMission = () => {
                                             <div className="M-pointsHeader">
                                                 Protecting And Serving The Community
                                             </div>
-                                            <span className="M-pointsDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui repellat vitae rerum quasi expedita dicta sed fuga atque! Iure nihil libero incidu</span>
+                                            <span className="M-pointsDesc">"Community policing is a proactive approach to law enforcement that emphasizes building trust and partnerships with members of the community."</span>
                                         </div>
                                     </div>
                                     <div className="M-pointContainer">
                                         <div className="PointLine"></div>
                                         <div className="M-point">
                                             <div className="M-pointsHeader">
-                                                Protecting And Serving The Community
+                                                Covering & Helping Public Justice Law
                                             </div>
-                                            <span className="M-pointsDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui repellat vitae rerum quasi expedita dicta sed fuga atque! Iure nihil libero incidu</span>
+                                            <span className="M-pointsDesc">"Public justice law encompasses the legal system and laws that protect the rights and welfare of the general public, ensuring fair and just treatment for all citizens."</span>
                                         </div>
                                     </div>
                                     <div className="M-pointContainer">
                                         <div className="PointLine"></div>
                                         <div className="M-point">
                                             <div className="M-pointsHeader">
-                                                Protecting And Serving The Community
+                                                Ensuring Safety And Well-Being For Society
                                             </div>
-                                            <span className="M-pointsDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui repellat vitae rerum quasi expedita dicta sed fuga atque! Iure nihil libero incidu</span>
+                                            <span className="M-pointsDesc">"Ensuring safety and well-being for society involves creating and implementing policies and practices that promote the physical and mental health, security and prosperity of the community as a whole."</span>
                                         </div>
                                     </div>
 
