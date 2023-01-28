@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      -name: Install vite
+      -run: npm install -g vite
       - run: yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
