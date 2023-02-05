@@ -48,7 +48,7 @@ const Criminals = ({ setActive, user }) => {
       try {
         setLoading(true)
         await deleteDoc(doc(db, "criminals", id));
-        toast.success("Criminal Data Deleted Sucessfully!")
+        TTT.success("Criminal Data Deleted Sucessfully!")
         setLoading(false);
       } catch (err) {
         console.log(`Error`, err);
@@ -59,9 +59,9 @@ const Criminals = ({ setActive, user }) => {
 
   return (
     <div>
-            <ScrollToTop />
+      <ScrollToTop />
       {/* ADD SOMETHING WHICH ADDS THE INFO ON CRIMINAL HEADER */}
-      <h1>Criminals</h1>
+      <h1 className='criminalHeading'>Criminals</h1>
       <CriminalCards criminals={criminals} user={user} handleDelete={handleDelete} />
       {/* <TagsPage tags={tags} /> */}
     </div>

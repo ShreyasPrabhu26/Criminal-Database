@@ -372,13 +372,13 @@ const AddCriminalDetails = ({ user, setActive }) => {
                     </div>
                     {/* {Police Designation} */}
                     <div className="form-category">
-                        <span className='F-label'>Police Designation</span>
+                        <span className='F-label'>Police Assigned</span>
                         <select
                             value={formData.policeId}
                             onChange={onPoliceDesignationChange}
                             required
                             className="form-category form-dropDown">
-                            <option>Police Designation</option>
+                            <option>Police Assigned</option>
                             {/* CHANGES HERE */}
                             {polices.map((option, index) => (
                                 <option

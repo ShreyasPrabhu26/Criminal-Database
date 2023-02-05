@@ -24,7 +24,7 @@ const AboutPolice = () => {
                     <span className="aboutPolice">ABOUT POLICE</span>
                     <div className="aboutPoliceHeader">We've Been Protecting The Community Since 1980</div>
                     <div className="aboutPoliceDescription">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum dolore ipsa vero est magni optio aperiam magnam officia ipsam aspernatur, nam nobis laboriosam quae minima voluptatibus ad distinctio assumenda eveniet?
+                    For over 40 years, we have been dedicated to protecting and serving the community with pride. Our commitment to ensuring the safety and security of all residents has never wavered. Through our tireless efforts, we have earned the trust and respect of those we serve, and continue to work tirelessly to maintain this standard of excellence.
                     </div>
                     <div className="aboutPolicePoints">
                         <ul className="Left-aboutPolicePoint">

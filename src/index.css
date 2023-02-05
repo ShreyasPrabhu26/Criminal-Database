@@ -446,6 +446,27 @@ li {
   text-decoration: none;
 }
 
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+}
+.polcieBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* background-color: rgb(150, 150, 183); */
+  color: rgb(35, 35, 164);
+  border-radius: 20px;
+}
+
+.polcieBadge > * {
+  width: 26px;
+  height: 30px;
+}
+
 .btn-criminalReadMore {
   background-color: #b54646;
   outline: none;
@@ -541,7 +562,11 @@ li {
 .DETAIL-policeDesignation {
   background-color: #66bdbd !important;
   border: 2px solid rgb(17, 84, 218);
-  width: auto;
+  width: auto !important;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .officer-header {
@@ -1250,4 +1275,13 @@ break {
 .exploreOfficers:hover {
   transform: scale(1.03);
   transition: 0.15s ease-in;
+}
+
+.criminalHeading {
+  background-color: rgb(195, 178, 213);
+  border-radius: 20px;
+  text-align: center;
+  font-size: 35px;
+  text-transform: uppercase;
+  letter-spacing: 2.75px;
 }

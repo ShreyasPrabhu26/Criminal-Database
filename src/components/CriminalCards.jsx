@@ -18,12 +18,11 @@ const CriminalCards = ({ criminals, user, handleDelete }) => {
                             {item.fullName}
                         </div>
                         <div className="criminalCrime Flex-center">
-                            <div>Icon</div>
+                            <div>Crime </div>
                             <div>{item.crimeCategory}</div>
                         </div>
                         <div className="criminalTime Flex-center">
-                            <div>Icon</div>
-
+                            <div>Date</div>
                             {item.timestamp.toDate().toDateString()}
                         </div>
                         <Link to={`/CriminalDetail/${item.id}`}>

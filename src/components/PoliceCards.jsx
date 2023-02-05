@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { excerpt } from "../utility";
 import 'react-toastify/dist/ReactToastify.css';
+import { GiPoliceBadge } from 'react-icons/Gi';
+import { SlCalender } from 'react-icons/Sl';
+
 
 const PoliceCards = ({ polices, user, handleDelete }) => {
     return (
         <div className="criminalCardMainContainer">
-            {console.log(polices)}
+            {/* {console.log(polices)} */}
             {polices?.map((item) => (
                 <div className="criminalCardContainer" key={item.id}>
                     <div className="criminalCardConatiner policeCardContainer Flex-center">
@@ -17,11 +20,11 @@ const PoliceCards = ({ polices, user, handleDelete }) => {
                             {item.fullName}
                         </div>
                         <div className="criminalCrime policeDesignation Flex-center">
-                            <div>Icon</div>
+                            <div className="polcieBadge"><GiPoliceBadge /></div>
                             <div>{item.policeDesignation}</div>
                         </div>
                         <div className="criminalTime Flex-center">
-                            <div>Icon</div>
+                            <div><SlCalender/></div>
 
                             {item.timestamp.toDate().toDateString()}
                         </div>

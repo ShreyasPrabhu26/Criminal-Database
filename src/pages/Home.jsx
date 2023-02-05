@@ -26,7 +26,7 @@ const Home = () => {
             An unwavering Commitment to integrity, the rule of law, human rights, dignity and respect for the Individual. An unrelenting pursuit of professional excellence, people-centric practices, good governance, transparency and accountability. A culture of inquiry and critical thinking.
           </span>
           <Link to="department">
-            <button className='homeBtn'>Exolore Department</button>
+            <button className='homeBtn'>Explore Department</button>
           </Link>
         </div>
         <div className="homeRightConatiner">

@@ -80,7 +80,6 @@ const PoliceDetail = ({ setActive }) => {
                             <span className="DETAIL-criminalName">{police?.fullName}</span>
                         </div>
                     </div>
-
                     <div className="DETAIL-criminalTypeCard">
                         <div className="">
                             <div className="DETAIL-crimeTypeCategoryCon">

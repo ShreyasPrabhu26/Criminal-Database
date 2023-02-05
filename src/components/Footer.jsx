@@ -65,7 +65,7 @@ const Footer = ({ active, setActive, user, }) => {
                     <div className="F-footerContent F-ContactUs">
                         <div className="F-list">Police Station Rd, near Manjeshwar, Hosabettu,</div>
                         <div className="F-list">(+91) 04998272640</div>
-                        <div className="F-list">support@keralaPolice.com</div>
+                        <div className="F-list">support@KarnatakaPolice.com</div>
                         <div className="F-list">Mon - Fri : 9:00 am - 5:00 pm</div>
                     </div>
                 </div>

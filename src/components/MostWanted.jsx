@@ -76,7 +76,7 @@ const MostWanted = ({ user }) => {
     }
     return (
         <div className="mostWantedCriminalContainer">
-            <h1 className='mostWantedCriminalTitle'>Most Wanted</h1>
+            <h1 className='mostWantedCriminalTitle criminalHeading'>Most Wanted</h1>
             <div className="criminalCardMainContainer">
                 {mostWantedCriminals?.map((item) => (
                     <div className="criminalCardContainer" key={item.id}>
